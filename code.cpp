@@ -132,6 +132,90 @@ public :
     };
 };
 
+class DNode {
+public :
+    int val ;
+    DNode * next ;
+    DNode * prev ;
+    DNode(int val){
+        this -> val = val ;
+        this -> next = NULL ;
+        this -> prev = NULL ;
+    };
+};
+
+class DLinkedlist {
+private :
+    DNode * head ;
+    DNode * tail ;
+public :
+    DLinkedlist(){
+        head = tail = NULL;
+    };
+    void push_front(int val){
+        DNode * newNode = new DNode(val);
+        if(head == NULL){
+            head = tail = newNode ;
+        }else{
+            newNode->next = head ;
+            head->prev = newNode ;
+            head = newNode ;
+        }
+    };
+
+    void push_back(int val){
+        DNode * newNode = new DNode(val);
+        if(head == NULL){
+            head = tail = newNode ;
+        }else{
+            newNode->prev = tail ;
+            tail->next = newNode ;
+            tail = newNode ;
+        }
+    };
+
+    void pop_front(){
+        if(head == NULL){
+            cout<<"List is empty"<<endl;
+            return ;
+        }
+        DNode * temp = head ;
+        head = head -> next ;
+        if(head != NULL){
+            head -> prev = NULL ;
+        }else{
+            tail = NULL ;
+        }
+        temp -> next = NULL ;
+        delete temp ;
+    };
+
+    void pop_back(){
+        if(head == NULL){
+            cout<<"List is empty"<<endl;
+            return ;
+        }
+        DNode * temp = tail ;
+        tail = tail->prev;
+        if(tail != NULL){
+            tail->next = NULL ;
+        }else{
+            head = NULL ;
+        }
+        temp->prev = NULL;
+        delete temp ;
+    };
+
+    void printDLL(){
+        DNode * temp = head ;
+        while(temp != NULL){
+            cout<<temp->val<<" -> ";
+            temp = temp->next;
+        }
+        cout<<" NULL "<<endl;
+    };
+};
+
 int main(){
     return 0;
 }
