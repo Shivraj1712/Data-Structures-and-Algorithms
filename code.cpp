@@ -10,13 +10,6 @@ public :
         this -> val = val ;
         this -> next = NULL ;
     };
-    Node(){
-        this -> val = NULL ;
-        this -> next = NULL ;
-    };
-    ~Node(){
-        delete next ;
-    } ;
 };
 
 class Linkedlist {
@@ -46,7 +39,7 @@ public :
         tail = newNode ;
     };
     void insert(int pos , int val){
-        if(pos < 1){
+        if(pos < 0){
             cout<<"Invalid Value"<<endl;
             return ;
         }
@@ -60,7 +53,7 @@ public :
             return ;
         }
         Node * temp = head ;
-        for(int i = 0 ; i < pos - 1 ; i++){
+        for(int i = 0 ; i < pos - 1 && temp != NULL ; i++){
             temp = temp->next ;
         }
         if(temp == NULL){
@@ -214,8 +207,19 @@ public :
         }
         cout<<" NULL "<<endl;
     };
+    ~DLinkedlist(){
+        while(head != NULL){
+            pop_front();
+        }
+    };
 };
 
 int main(){
+    Linkedlist  l1 ;
+    l1.pushback(3);
+    l1.pushback(4);
+    l1.pushfront(2);
+    l1.pushfront(1);
+    l1.printLL(); //OUTPUT : 1 -> 2 -> 3 -> 4 ->  NULL 
     return 0;
 }
